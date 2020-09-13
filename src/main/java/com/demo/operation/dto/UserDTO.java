@@ -3,10 +3,6 @@ package com.demo.operation.dto;
 import com.common.base.BaseDTO;
 import lombok.Data;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 @Data
 public class UserDTO extends BaseDTO {
     //数据主键
