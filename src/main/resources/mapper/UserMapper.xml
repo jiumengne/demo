@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.operation.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.demo.operation.dto.UserDTO">
+                insert  t_user (user_name,user_age,user_mobile,user_email,creator,create_date,modifier,modification_date)
+                 value (#{userName,jdbcType=VARCHAR},#{userAge,jdbcType=INTEGER},#{userMobile,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR}
+                 ,#{creator,jdbcType=VARCHAR},now(),#{modifier,jdbcType=VARCHAR},now())
+    </insert>
+
+    <update id="updateUser" parameterType="com.demo.operation.dto.UserDTO">
+                update t_user set
+                   user_name = #{userName,jdbcType=VARCHAR},
+                   user_age = #{userAge,jdbcType=INTEGER},
+                   user_mobile = #{userMobile,jdbcType=VARCHAR},
+                   user_email = #{userEmail,jdbcType=VARCHAR},
+                   modifier = #{modifier,jdbcType=VARCHAR},
+                   modification_date = now()
+                   where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findByUserMobile" resultType="com.demo.operation.dto.UserDTO">
+        select * from t_user where user_mobile = #{userMobile,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectUserPage" resultType="com.demo.operation.dto.UserDTO">
+        select * from t_user
+        where
+         1=1
+         <if test="userName != null and userName != ''">
+         and user_name = #{userName,jdbcType=VARCHAR}
+         </if>
+        <if test="userMobile != null and userMobile != ''">
+        and user_mobile = #{userMobile,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="findById" resultType="com.demo.operation.dto.UserDTO">
+        select * from t_user where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteById">
+        delete from t_user where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

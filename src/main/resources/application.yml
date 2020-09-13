@@ -1,0 +1,22 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: demo
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ems?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: root
+mybatis:
+  type-aliases-package: com.demo
+  mapper-locations: classpath:mapper/*.xml
+  #当数据库中取出来是null是，显示的值
+  configuration:
+    jdbc-type-for-null: 'null'
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.model: info
+  file:
+    name: d:/logs/demo/demo.log
