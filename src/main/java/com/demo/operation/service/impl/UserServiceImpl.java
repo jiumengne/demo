@@ -2,7 +2,10 @@ package com.demo.operation.service.impl;
 
 import com.common.base.ResponseDTO;
 import com.demo.operation.dto.UserDTO;
-import com.demo.operation.entity.UserEntity;
+import com.demo.operation.dto.UserRoleDTO;
+import com.demo.operation.mapper.UserRoleMapper;
+import com.demo.operation.vo.UserRoleVo;
+import com.demo.operation.vo.UserVo;
 import com.demo.operation.mapper.UserMapper;
 import com.demo.operation.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -20,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public ResponseDTO addUser(UserDTO user) {
@@ -65,9 +71,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseDTO selectUserPage(UserEntity entity) {
-        PageHelper.startPage(entity.getPage(),entity.getLimit());
-        List<UserDTO> list=userMapper.selectUserPage(entity);
+    public ResponseDTO selectUserPage(UserVo vo) {
+        PageHelper.startPage(vo.getPage(),vo.getLimit());
+        List<UserDTO> list=userMapper.selectUserPage(vo);
         PageInfo pageInfo = new PageInfo(list);
         return  new ResponseDTO().ok(pageInfo);
     }
@@ -84,7 +90,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseDTO deleteUser(String id) {
         userMapper.deleteById(id);
+        return new ResponseDTO().ok();
+    }
+
+    @Override
+    public ResponseDTO bindUserRole(UserRoleVo vo) {
+        //检查现有关系是否存在
+        UserRoleDTO mapper = userRoleMapper.findByUserRole(vo);
+        if(mapper != null){
+            return  new ResponseDTO().fail("该关系已绑定！");
+        }
+        userRoleMapper.bindUserRole(vo);
         return  new ResponseDTO().ok();
+    }
+
+    @Override
+    public ResponseDTO unbindUserRole(Integer id) {
+        userRoleMapper.unbindUserRole(id);
+        return new ResponseDTO().ok();
     }
 
     /**

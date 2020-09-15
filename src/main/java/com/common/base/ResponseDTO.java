@@ -35,7 +35,7 @@ public class ResponseDTO {
         return this;
     }
     public ResponseDTO warn(String msg,Object data){
-        this.status = ResponseConstants.WARN;
+        this.status = ResponseConstants.SUCCESS;
         this.msg = msg;
         this.data = data;
         return this;

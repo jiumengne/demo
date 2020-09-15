@@ -2,7 +2,8 @@ package com.demo.operation.service;
 
 import com.common.base.ResponseDTO;
 import com.demo.operation.dto.UserDTO;
-import com.demo.operation.entity.UserEntity;
+import com.demo.operation.vo.UserRoleVo;
+import com.demo.operation.vo.UserVo;
 
 public interface UserService {
 
@@ -10,9 +11,13 @@ public interface UserService {
 
     ResponseDTO updateUser(UserDTO user);
 
-    ResponseDTO selectUserPage(UserEntity entity);
+    ResponseDTO selectUserPage(UserVo vo);
 
     ResponseDTO selectUserById(String id);
 
     ResponseDTO deleteUser(String id);
+
+    ResponseDTO bindUserRole(UserRoleVo vo);
+
+    ResponseDTO unbindUserRole(Integer id);
 }

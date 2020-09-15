@@ -1,7 +1,7 @@
 package com.demo.operation.mapper;
 
 import com.demo.operation.dto.UserDTO;
-import com.demo.operation.entity.UserEntity;
+import com.demo.operation.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface UserMapper {
 
     UserDTO findByUserMobile(String userMobile);
 
-    List<UserDTO> selectUserPage(UserEntity entity);
+    List<UserDTO> selectUserPage(UserVo entity);
 
     int deleteById(String id);
 }

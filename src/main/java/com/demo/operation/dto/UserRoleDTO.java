@@ -3,7 +3,7 @@ package com.demo.operation.dto;
 import lombok.Data;
 
 @Data
-public class UserRoleMapper {
+public class UserRoleDTO {
 
     private Integer id;
 

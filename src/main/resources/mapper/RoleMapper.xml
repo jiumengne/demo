@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.operation.mapper.RoleMapper">
+    <insert id="addRole" parameterType="com.demo.operation.dto.RoleDTO">
+                insert  t_Role (role_name,creator,create_date,modifier,modification_date)
+                 value (#{roleName,jdbcType=VARCHAR},#{creator,jdbcType=VARCHAR},now(),#{modifier,jdbcType=VARCHAR},now())
+    </insert>
+
+    <update id="updateRole" parameterType="com.demo.operation.dto.RoleDTO">
+                update t_role set
+                   role_name = #{roleName,jdbcType=VARCHAR},
+                   modifier = #{modifier,jdbcType=VARCHAR},
+                   modification_date = now()
+                   where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findByRoleName" resultType="com.demo.operation.dto.RoleDTO">
+        select * from t_role where role_name = #{roleName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectRolePage" resultType="com.demo.operation.dto.RoleDTO">
+        select * from t_Role
+        where
+         1=1
+         <if test="RoleName != null and RoleName != ''">
+         and role_name like concat('%', #{roleName,jdbcType=VARCHAR}, '%')
+         </if>
+    </select>
+
+    <select id="findById" resultType="com.demo.operation.dto.RoleDTO">
+        select * from t_role where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteById">
+        delete from t_role where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

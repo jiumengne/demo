@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.operation.mapper.UserRoleMapper">
+    <insert id="bindUserRole" parameterType="com.demo.operation.vo.UserRoleVo">
+                insert  t_user_role (user_id,role_id)
+                value (#{userId},#{roleId},now())
+    </insert>
+
+    <delete id="unbindUserRole">
+        delete from t_user_role where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="findByUserRole" resultType="com.demo.operation.dto.UserRoleDTO">
+        select * from t_user_role where 1=1
+        and user_id = #{userId,jdbcType=INTEGER}
+        and role_id = #{roleId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

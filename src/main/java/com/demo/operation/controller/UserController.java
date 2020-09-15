@@ -2,12 +2,12 @@ package com.demo.operation.controller;
 
 import com.common.base.ResponseDTO;
 import com.demo.operation.dto.UserDTO;
-import com.demo.operation.entity.UserEntity;
+import com.demo.operation.vo.UserRoleVo;
+import com.demo.operation.vo.UserVo;
 import com.demo.operation.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +40,8 @@ public class UserController {
 
     @PostMapping("/pageUser")
     @ApiOperation("分页查询用户")
-    private ResponseDTO selectUserPage(UserEntity entity){
-        ResponseDTO responseDTO= userService.selectUserPage(entity);
+    private ResponseDTO selectUserPage(UserVo vo){
+        ResponseDTO responseDTO= userService.selectUserPage(vo);
         return responseDTO;
     }
 
@@ -56,6 +56,20 @@ public class UserController {
     @ApiOperation("删除用户")
     private ResponseDTO deleteUser(String id){
         ResponseDTO responseDTO= userService.deleteUser(id);
+        return responseDTO;
+    }
+
+    @PostMapping
+    @ApiOperation("绑定用户与角色关系")
+    private ResponseDTO bindUserRole(UserRoleVo Vo){
+        ResponseDTO responseDTO= userService.bindUserRole(Vo);
+        return responseDTO;
+    }
+
+    @PostMapping
+    @ApiOperation("绑定用户与角色关系")
+    private ResponseDTO unbindUserRole(Integer id){
+        ResponseDTO responseDTO= userService.unbindUserRole(id);
         return responseDTO;
     }
 }

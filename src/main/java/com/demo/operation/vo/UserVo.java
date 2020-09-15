@@ -1,10 +1,10 @@
-package com.demo.operation.entity;
+package com.demo.operation.vo;
 
 import com.common.base.RequestDTO;
 import lombok.Data;
 
 @Data
-public class UserEntity extends RequestDTO {
+public class UserVo extends RequestDTO {
     //用户姓名
     private String userName;
 
